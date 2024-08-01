@@ -9,11 +9,18 @@ public:
 
 	void Run();
 	void Update();
-	void Initialize(HWND hWnd);
+	void Initialize(HWND hWnd, UINT width, UINT Heigh);
 	void Render();
 
 private:
 	class Actor* MyActor;
+
+	UINT mwidth;
+	UINT mheigh;
+
+	HDC mBackHDC;
+	HBITMAP mBuffer;
+
 	HWND mhwnd;
 	HDC mhdc;
 };

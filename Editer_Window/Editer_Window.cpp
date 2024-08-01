@@ -4,6 +4,8 @@
 
 #define MAX_LOADSTRING 100
 
+WonApplication MyEngine;
+
 HINSTANCE hInst;
 WCHAR szTitle[MAX_LOADSTRING];
 WCHAR szWindowClass[MAX_LOADSTRING];
@@ -13,7 +15,6 @@ BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
-WonApplication MyEngine;
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -33,6 +34,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     }
 
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_EDITERWINDOW));
+
     MSG msg;
 
     while(true)
@@ -40,9 +42,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         if(PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
         {
             if(msg.message == WM_QUIT)
-            {
                 break;
-            }
+
             if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
             {
                 TranslateMessage(&msg);
@@ -54,6 +55,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             MyEngine.Run();
         }
     }
+
     return (int) msg.wParam;
 }
 
@@ -82,15 +84,23 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance;
 
-   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+   const UINT width = 1600;
+   const UINT heigh = 900;
 
-   MyEngine.Initialize(hWnd);
+   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
+      CW_USEDEFAULT, 0, width, heigh, nullptr, nullptr, hInstance, nullptr);
+
+   MyEngine.Initialize(hWnd, width, heigh);
 
    if (!hWnd)
    {
       return FALSE;
    }
+
+   RECT rect = { 0, 0, width, heigh };
+
+   AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, false);
+   SetWindowPos(hWnd, nullptr, 0, 0, rect.right - rect.left, rect.bottom - rect.top, 0);
 
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);

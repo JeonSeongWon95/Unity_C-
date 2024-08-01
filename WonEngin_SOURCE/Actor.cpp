@@ -1,12 +1,13 @@
 #include "Actor.h"
 #include "Input.h"
+#include "mTimer.h"
 
 Actor::Actor()
 {
 	PositionX = 0;
 	PositionY = 0;
 	mhWnd = nullptr;
-	mhdc = nullptr;
+	Speed = 100.0f;
 }
 
 Actor::~Actor()
@@ -22,19 +23,19 @@ void Actor::Update()
 {
 	if(Input::GetKey(mKeyCode::A))
 	{
-		PositionX -= 0.01f;
+		PositionX -= Speed * mTimer::GetDeltaTime();
 	}
 	if (Input::GetKey(mKeyCode::D))
 	{
-		PositionX += 0.01f;
+		PositionX += Speed * mTimer::GetDeltaTime();
 	}
 	if (Input::GetKey(mKeyCode::W))
 	{
-		PositionY -= 0.01f;
+		PositionY -= Speed * mTimer::GetDeltaTime();
 	}
 	if (Input::GetKey(mKeyCode::S))
 	{
-		PositionY += 0.01f;
+		PositionY += Speed * mTimer::GetDeltaTime();
 	}
 }
 

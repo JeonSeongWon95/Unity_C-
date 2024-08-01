@@ -16,10 +16,10 @@ public:
 	void Render(HDC hdc);
 
 private:
+	float Speed;
 	float PositionX;
 	float PositionY;
 	HWND mhWnd;
-	HDC mhdc;
 
 };
 

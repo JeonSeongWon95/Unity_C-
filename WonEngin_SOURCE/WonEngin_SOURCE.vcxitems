@@ -16,11 +16,13 @@
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Actor.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Input.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)mTimer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WonApplication.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)Actor.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Input.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)mTimer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WonApplication.cpp" />
   </ItemGroup>
 </Project>
